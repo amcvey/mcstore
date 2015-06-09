@@ -1,13 +1,15 @@
 class ProductsController < ApplicationController
+
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index]
   load_and_authorize_resource
 
 
+
   # GET /products
   # GET /products.json
   def index
-    @query = params[:q]
+    @query = params[:query]
     if @query.nil?
       @products = Product.all
     else
@@ -15,6 +17,12 @@ class ProductsController < ApplicationController
     end
 
     @products = @products.page params[:page]
+
+    respond_to do |format| 
+
+      format.html
+      format.js 
+    end 
   end
 
   # GET /products/1
@@ -72,14 +80,16 @@ class ProductsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params.require(:product).permit(:photo, :nombre, :price, :description, :stock, :category)
+    end
+
+     private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_product
+      @product = Products.friendly.find(params[:id])
     end
 end

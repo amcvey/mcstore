@@ -31,6 +31,10 @@ gem 'carrierwave'
 
 gem 'kaminari'
 
+gem 'pg_search'
+
+gem 'friendly_id', '~> 5.1.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

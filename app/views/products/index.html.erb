@@ -1,7 +1,12 @@
-<form method="GET">
-  <input name="q" <%= @q %> >
-  <button type="submit"> Buscar</button>
+
+<div>
+  <h3> Search for a Product: </h3>
+<form method="GET" action="/" >
+  <input type="text" id="q" name="query" <%= @q %> >
+  <button type="submit" value="Send"> Search </button>
 </form>
+     
+</div>
 
 <h1>Listing Products</h1>
 
@@ -18,20 +23,8 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= image_tag(product.photo, style: 'width:300px')  %></td>
-        <td><%= product.nombre %></td>
-        <td><%= product.price %></td>
-        <td><%= product.description %></td>
-        <td><%= product.stock %></td>
-        <td><%= product.category %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) if can? :edit, product %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, product%></td>
-      </tr>
-    <% end %>
+  <tbody id="products">
+  <%= render @products %>
   </tbody>
 </table>
 
@@ -39,3 +32,18 @@
 
 <%= paginate @products %>
 <%= link_to 'New Product', new_product_path %>
+
+<script>
+  
+  $('#q').keyup(function(event) {
+
+    $.ajax({
+      url: '/',
+      type: 'GET' ,
+      dataType: 'script',
+      data: {query: $(this).val()},
+    });    
+
+  });
+
+</script>
