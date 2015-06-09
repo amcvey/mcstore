@@ -29,6 +29,8 @@ gem 'cancancan', '~> 1.10'
 
 gem 'carrierwave'
 
+gem 'kaminari'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -13,6 +13,8 @@ class ProductsController < ApplicationController
     else
       @products = Product.where("nombre like ?", "%#{@query}%")
     end
+
+    @products = @products.page params[:page]
   end
 
   # GET /products/1
