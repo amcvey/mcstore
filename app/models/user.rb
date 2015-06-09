@@ -3,4 +3,15 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  has_many :products, dependent: :destroy 
+
+  before_save :default_values
+
+  enum role: [:guest, :admin]
+
+  def default_values
+      self.role ||=0 
+    end
+
 end

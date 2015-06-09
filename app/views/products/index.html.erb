@@ -25,8 +25,8 @@
         <td><%= product.stock %></td>
         <td><%= product.category %></td>
         <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_product_path(product) if can? :edit, product %></td>
+        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, product%></td>
       </tr>
     <% end %>
   </tbody>
