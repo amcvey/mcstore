@@ -9,8 +9,6 @@ class Ability
       can :manage, :all
     elsif user.guest?
       can :read, :all
-      can :create, [Product]
-      can [:update, :destroy], [Product], user_id: user.id
     else
       can :read, :all
     end
